@@ -72,9 +72,13 @@ export function AppShell({ children }: { children: ReactNode }) {
   });
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    // The root sets viewport-fit=cover, so the page extends under the system
+    // bars. env(safe-area-inset-*) keeps the header clear of the status bar /
+    // notch and the tab bar clear of the gesture pill. All four resolve to 0px
+    // on the web, so this is inert outside the app.
+    <div className="min-h-screen bg-background pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] text-foreground">
       <div className="mx-auto flex min-h-screen max-w-md flex-col">
-        <header className="flex items-center justify-between px-5 pb-4 pt-6">
+        <header className="flex items-center justify-between px-5 pb-4 pt-[calc(1.5rem+env(safe-area-inset-top))]">
           <Link to="/" className="flex items-center gap-2.5">
             <div className="grid size-9 place-items-center rounded-xl border border-primary/25 bg-primary/10 shadow-glow">
               <div className="size-3.5 rounded-full bg-primary animate-breathe" />
@@ -95,9 +99,11 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
         </header>
 
-        <main className="flex-1 pb-20">{hydrated ? children : null}</main>
+        <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))]">
+          {hydrated ? children : null}
+        </main>
 
-        <nav className="sticky bottom-0 px-4 pb-6 pt-3 backdrop-blur-sm">
+        <nav className="sticky bottom-0 px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-sm">
           <div className="grid grid-cols-4 items-center rounded-2xl border border-line bg-panel/85 px-2 py-2.5">
             {NAV.map(({ to, label, icon: Icon, exact }) => {
               const active = exact ? pathname === to : pathname.startsWith(to);

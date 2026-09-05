@@ -2,6 +2,22 @@
 @source "../src";
 @import "tw-animate-css";
 
+/*
+ * Fonts are bundled, not fetched. The Android build ships as a folder of
+ * static files with no network guarantee — and a focus app is exactly what
+ * gets opened in airplane mode — so pulling Inter and Space Grotesk from
+ * fonts.googleapis.com would drop the app to system-ui whenever it is
+ * offline. These are the same families, self-hosted (latin subset only).
+ */
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+@import "@fontsource/space-grotesk/latin-400.css";
+@import "@fontsource/space-grotesk/latin-500.css";
+@import "@fontsource/space-grotesk/latin-600.css";
+@import "@fontsource/space-grotesk/latin-700.css";
+
 @custom-variant dark (&:is(.dark *));
 
 /*
