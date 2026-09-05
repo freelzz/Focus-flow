@@ -1,0 +1,161 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * FocusFlow design system — "Liquid Obsidian"
+ * Dark by default. One accent (mint) used sparingly.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
+  --color-panel2: var(--panel2);
+  --color-line: var(--line);
+  --color-card: var(--panel);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--panel2);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--panel2);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--panel2);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle: var(--subtle-foreground);
+  --color-accent: var(--panel2);
+  --color-accent-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--primary);
+
+  --shadow-glow: 0 10px 40px -8px color-mix(in oklab, var(--primary) 55%, transparent);
+  --shadow-soft: 0 8px 30px -12px oklch(0 0 0 / 0.6);
+}
+
+:root {
+  --radius: 1rem;
+  /* dark (default) */
+  --background: oklch(0.14 0.008 285);
+  --foreground: oklch(0.92 0.004 285);
+  --panel: oklch(0.19 0.008 285);
+  --panel2: oklch(0.23 0.009 285);
+  --line: oklch(0.29 0.008 285);
+  --muted-foreground: oklch(0.63 0.008 285);
+  --subtle-foreground: oklch(0.5 0.008 285);
+  --primary: oklch(0.87 0.15 158);
+  --primary-foreground: oklch(0.14 0.008 285);
+  --destructive: oklch(0.63 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+}
+
+html.light {
+  --background: oklch(0.985 0.002 285);
+  --foreground: oklch(0.2 0.008 285);
+  --panel: oklch(1 0 0);
+  --panel2: oklch(0.96 0.003 285);
+  --line: oklch(0.9 0.004 285);
+  --muted-foreground: oklch(0.5 0.008 285);
+  --subtle-foreground: oklch(0.6 0.008 285);
+  --primary: oklch(0.68 0.14 158);
+  --primary-foreground: oklch(0.99 0 0);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    overscroll-behavior-y: none;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 30%, transparent);
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+}
+
+@utility card-panel {
+  background-color: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+@keyframes ff-pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ff-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ff-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+
+@utility animate-pop {
+  animation: ff-pop 0.25s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@utility animate-rise {
+  animation: ff-rise 0.35s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@utility animate-breathe {
+  animation: ff-breathe 3.6s ease-in-out infinite;
+}
